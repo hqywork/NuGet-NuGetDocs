@@ -46,7 +46,7 @@ A .nuspec is an XML manifest file that describes a package's contents and drives
 Here's typical (but fictitious) `.nuspec` file, with annotation comments:
 
     <?xml version="1.0"?>
-    <package xmlns="http://schemas.microsoft.com/packaging/2016/06/nuspec.xsd">
+    <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
       <metadata>
         <!-- The identifier that must be unique within the hosting gallery -->
         <id>Contoso.Utility.UsefulStuff</id>
@@ -123,7 +123,7 @@ The resulting `<package_name>.nuspec` file (or `Package.nuspec` if you omit a sp
 You can also use `nuget spec` with an existing assembly, a Visual Studio project, or a convention-based working directory as described in the following sections. Note that in all cases, the resulting `.nuspec` file will contain placeholders that you'll need to edit before creating the package itself.
 
 ### From an assembly DLL
-If you have an assembly DLL, you can easily generate a `.nuspec` file from the metatdata in the assembly using the following command:
+If you have an assembly DLL, you can easily generate a `.nuspec` file from the metadata in the assembly using the following command:
 
 <code class="bash hljs">
     nuget spec MyAssembly.dll
@@ -180,22 +180,22 @@ To include all these files in a package, you lay out a folder structure using th
     </tr>
     <tr>
         <td><strong>lib</strong></td>
-        <td>Assemblies (.dll files)</td>
-        <td>Added as assembly references</td>
+        <td>Assembly(.dll) files (.dll), documentation (.xml) files, and symbol (.pdb) files</td>
+        <td>Assemblies are added as references; .xml and .pdb copied into project folders.</td>
     </tr>
     <tr>
         <td><strong>content</strong></td>
         <td>Arbitrary files</td>
-        <td>Contents are copied to the project root</td>
+        <td>Contents are copied to the project root.</td>
     </tr>
     <tr>
         <td><strong>build</strong></td>
         <td>MSBuild .targets and .props files</td>
-        <td>Automatically inserted into the project file (NuGet 2.x) or project.json.lock (NuGet 3.x)</td>
+        <td>Automatically inserted into the project file (NuGet 2.x) or project.json.lock (NuGet 3.x).</td>
     </tr>
 </table>
 
-Think of the **content** folder as the of the target application, so if you want the package to add an image in the application's */images* folder, place it in the *content/images* folder of the package.
+Think of the **content** folder as the root of the target application, so if you want the package to add an image in the application's */images* folder, place it in the *content/images* folder of the package.
 
 Next, from the root folder of this layout, run the following command to create the `.nuspec` file:
 
@@ -251,7 +251,7 @@ Package types are set either in the `.nuspec` file or in `project.json`. In both
           <metadata>
             <!-- ... -->
             <packageTypes>
-              <packageType type="DotnetCliTool" />
+              <packageType name="DotnetCliTool" />
             </packageTypes>
           </metadata>
         </package>
@@ -270,7 +270,7 @@ Package types are set either in the `.nuspec` file or in `project.json`. In both
 To directly specify files to include in the package, use the **&lt;files&gt;** node in the `.nuspec` file, which *follows* the &lt;metadata&gt; tag:
 
     <?xml version="1.0"?>
-    <package xmlns="http://schemas.microsoft.com/packaging/2016/06/nuspec.xsd">
+    <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
       <metadata>
         <!-- ... -->
       </metadata>
