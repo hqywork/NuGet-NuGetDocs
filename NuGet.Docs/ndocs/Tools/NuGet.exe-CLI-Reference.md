@@ -1,4 +1,5 @@
 # NuGet CLI Reference
+# NuGet CLI 参考
 
 The NuGet Command Line Interface (CLI) provides the full extent of NuGet functionality to install, create, publish, and manage packages. Refer to the [Install Guide](/ndocs/guides/install-nuget) for installation instructions.
 
@@ -6,9 +7,9 @@ Available commands are listed below. Also see the section on [Environment variab
 
 <table>
     <tr>
-        <th>Command</th>
-        <th>Description</th>
-        <th>NuGet Version</th>
+        <th>Command <br /> 命令</th>
+        <th>Description <br /> 描述</th>
+        <th>NuGet Version <br /> 版本</th>
     </tr>
     <tr>
         <td><a href="#add">add</a></td>
@@ -62,7 +63,7 @@ Available commands are listed below. Also see the section on [Environment variab
     </tr>
     <tr>
         <td><a href="#push">push</a></td>
-        <td>Publishes a package to a package source.</td>
+        <td>Publishes a package to a package source. <br /> 将包发布到包源。</td>
         <td>All</td>
     </tr>
     <tr>
@@ -187,47 +188,63 @@ In NuGet 3.4+, &lt;value&gt; can be use environment variables.
     nuget config -set HTTP_PROXY=http://127.0.0.1 -set HTTP_PROXY.USER=domain\user
 
 
-##  delete
+## delete
 
 Deletes or unlists a package from a package source. For nuget.org, the action is to [unlist the package](/ndocs/policies/deleting-packages).
+>从包源中删除或下架一个包。在 nuget.org 中，这个行为称为 [unlist the package](/ndocs/policies/deleting-packages)。
 
 #### Usage
+#### 用法
 
     nuget delete <packageID> <packageVersion> [options]
 
 where &lt;packageID&gt; and &lt;packageVersion&gt; identify the exact package to delete or unlist. The exact behavior depends on the source. For local folders, for instance, the package is deleted; for nuget.org the package is unlisted.
+>&lt;packageID&gt; and &lt;packageVersion&gt; 标识了将要删除或下架的包。确切的行为依赖于包源。以本地文件夹为例包将被删除；对于 nuget.org 包则被下架。
 
 #### Options
+#### 选项
 
 <table>
     <tr>
         <td>apikey</td>
-        <td>The API key for the target repository. If not present,  the one specified in <em>%AppData%\NuGet\NuGet.config</em> is used.</td>
+        <td>
+            The API key for the target repository. If not present,  the one specified in <em>%AppData%\NuGet\NuGet.config</em> is used. <br />
+            目标存储库的 API 键。如果未指定，将使用 %AppData%\NuGet\NuGet.config 中指定的。
+        </td>
     </tr>
     <tr>
         <td>configfile</td>
-        <td><em>(2.5+)</em> The NuGet configuration file to modify. If not specified,
-        <em>%AppData%\NuGet\NuGet.config</em> is used.</td>
+        <td>
+            <em>(2.5+)</em> The NuGet configuration file to modify. If not specified, <em>%AppData%\NuGet\NuGet.config</em> is used. <br />
+            (2.5+) 将修改的 NuGet 配置文件。如果未指定，将使用 %AppData%\NuGet\NuGet.config。
+        </td>
     </tr>
     <tr>
         <td>help</td>
-        <td>Displays help information for the command.</td>
+        <td>Displays help information for the command. <br /> 显示命令的帮助信息。</td>
     </tr>
     <tr>
         <td>noninteractive</td>
-        <td>Suppresses prompts for user input or confirmations.</td>
+        <td>Suppresses prompts for user input or confirmations. <br /> 取消用户输入或确认的提示。</td>
     </tr>
     <tr>
         <td>source</td>
-        <td>Specifies the server URL. Supported URLs for nuget.org include <em>https://www.nuget.org, https://www.nuget.org/api/v3, https://www.nuget.org/api/v2/package</em>. For private feeds, substitute the host name, for example, <em>%hostname%/api/v3</em>.</td>
+        <td>
+            Specifies the server URL. Supported URLs for nuget.org include <em>https://www.nuget.org, https://www.nuget.org/api/v3, https://www.nuget.org/api/v2/package</em>. For private feeds, substitute the host name, for example, <em>%hostname%/api/v3</em>. <br />
+            指定服务器 URL。对于 nuget.org，支持 <em>https://www.nuget.org, https://www.nuget.org/api/v3, https://www.nuget.org/api/v2/package</em> 等 URL。对于私有订阅源，需要替代主机名称，例如，<em>%hostname%/api/v3</em>。
+        </td>
     </tr>
     <tr>
         <td>verbosity</td>
-        <td>Specifies the amount of details displayed in the output: <em>normal</em>, <em>quiet</em>, <em>detailed (2.5+)</em>.</td>
+        <td>
+            Specifies the amount of details displayed in the output: <em>normal</em>, <em>quiet</em>, <em>detailed (2.5+)</em>. <br />
+            指定输出中显示的详细程序：normal, quiet, detailed (2.5+)。
+        </td>
     </tr>
 </table>
 
 #### Examples
+#### 示例
 
     nuget delete MyPackage 1.0
 
@@ -692,53 +709,74 @@ For this project, the package created by `nuget pack` will have a dependency on 
     nuget pack foo.nuspec -version 1.0.0 -minclientversion 2.5
 
 
-##  push
+## push
 
 Pushes a package to a package source and publishes it.
+>推送包到包源，并发布它。
 
 NuGet's default configuration is obtained by loading `%AppData%\NuGet\NuGet.config`, then loading any `nuget.config` or `.nuget\nuget.config` files starting from root of drive and ending in current directory (see [Configuring NuGet Behavior](/ndocs/consume-packages/configuring-nuget-behavior))
+>NuGet 的默认配置是通过加载 `%AppData%\NuGet\NuGet.config`，然后加载任意的 `nuget.config` 或 `.nuget\nuget.config` 文件（在驱动器根到当前目录）。（参阅 [Configuring NuGet Behavior](/ndocs/consume-packages/configuring-nuget-behavior)）
 
 #### Usage
+#### 用法
 
     nuget push <packagePath> [options]
 
 where &lt;packagePath&gt; identifies the package to push to the server.
+>&lt;packagePath&gt; 代表包将要被推送的服务器。
 
 #### Options
+#### 选项
 
 <table>
     <tr>
         <td>apikey</td>
-        <td>The API key for the target repository. If not present,  the one specified in <em>%AppData%\NuGet\NuGet.config</em> is used.</td>
+        <td>
+            The API key for the target repository. If not present,  the one specified in <em>%AppData%\NuGet\NuGet.config</em> is used. <br />
+            目标存储库的 API 键。如果未指定，将使用 <em>%AppData%\NuGet\NuGet.config</em> 中指定的。
+        </td>
     </tr>
     <tr>
         <td>configfile</td>
-        <td><em>(2.5+)</em> The NuGet configuration file to modify. If not specified,
-        <em>%AppData%\NuGet\NuGet.config</em> is used.</td>
+        <td>
+            <em>(2.5+)</em> The NuGet configuration file to modify. If not specified, <em>%AppData%\NuGet\NuGet.config</em> is used. <br />
+            <em>(2.5+)</em> 将修改的 NuGet 配置文件。如果未指定，将使用 <em>%AppData%\NuGet\NuGet.config</em>。
+        </td>
     </tr>
     <tr>
         <td>help</td>
-        <td>Displays help information for the command.</td>
+        <td>Displays help information for the command. <br /> 显示命令的帮助信息。</td>
     </tr>
     <tr>
         <td>noninteractive</td>
-        <td>Suppresses prompts for user input or confirmations.</td>
+        <td>Suppresses prompts for user input or confirmations. <br /> 取消用户输入或确认的提示。</td>
     </tr>
     <tr>
         <td>source</td>
-        <td>Specifies the server URL. With NuGet 2.5+, NuGet will identify a UNC or local folder source and simply copy the file there instead of pushing it using HTTP.  Also, starting with NuGet 3.4.2, this is a mandatory parameter unless the NuGet.config file specifies a <em>DefaultPushSource</em> value.</td>
+        <td>
+            Specifies the server URL. With NuGet 2.5+, NuGet will identify a UNC or local folder source and simply copy the file there instead of pushing it using HTTP.  Also, starting with NuGet 3.4.2, this is a mandatory parameter unless the NuGet.config file specifies a <em>DefaultPushSource</em> value. <br />
+            指定服务 URL。在 NuGet 2.5+ 中，当指定一个 UNC 或本地文件夹源时仅简单的复制而不需要使用 HTTP 进行推送。
+            同样的，从 NuGet 3.4.2 开始，这是一个强制性参数除非在配置文件 NuGet.config 中指定了 <em>DefaultPushSource</em> 的值。
+        </td>
     </tr>
     <tr>
         <td>timeout</td>
-        <td>Specifies the timeout, in seconds, for pushing to a server. The default is 300 seconds (5 minutes).</td>
+        <td>
+            Specifies the timeout, in seconds, for pushing to a server. The default is 300 seconds (5 minutes). <br />
+            指定推送到服务器的超时时间，以秒为单位。默认为 300 秒（即 5 分钟）。
+        </td>
     </tr>
     <tr>
         <td>verbosity</td>
-        <td>Specifies the amount of details displayed in the output: <em>normal</em>, <em>quiet</em>, <em>detailed (2.5+)</em>.</td>
+        <td>
+            Specifies the amount of details displayed in the output: <em>normal</em>, <em>quiet</em>, <em>detailed (2.5+)</em>. <br />
+            指定输出中显示的详细程序：<em>normal</em>, <em>quiet</em>, <em>detailed (2.5+)</em>。
+        </td>
     </tr>
 </table>
 
 #### Examples
+#### 示例
 
     nuget push foo.nupkg
 
